@@ -16,7 +16,7 @@ You can start the electron process using
 using a downloaded `Electron.app` package:
 
 ```
-electron target/                          # Do not omit the trailing '/' 
+electron target/                          # Do not omit the trailing '/'
 ```
 
 The `build.boot` file is annotated so you can exactly understand
