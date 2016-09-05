@@ -1,12 +1,13 @@
-(ns app.main) 
+(ns app.main)
 
-(def app           (js/require "app"))
-(def BrowserWindow (js/require "browser-window"))
+(def electron      (js/require "electron"))
+(def app           (.-app electron))
+(def BrowserWindow (.-BrowserWindow electron))
 
 (goog-define dev? false)
 
 (defn load-page
-  "When compiling with `:none` the compiled JS that calls .loadUrl is
+  "When compiling with `:none` the compiled JS that calls .loadURL is
   in a different place than it would be when compiling with optimizations
   that produce a single artifact (`:whitespace, :simple, :advanced`).
 
@@ -15,8 +16,8 @@
   at compile time using the `:clojure-defines` compiler option."
   [window]
   (if dev?
-      (.loadUrl window (str "file://" js/__dirname "/../../index.html"))
-      (.loadUrl window (str "file://" js/__dirname "/index.html"))))
+      (.loadURL window (str "file://" js/__dirname "/../../index.html"))
+      (.loadURL window (str "file://" js/__dirname "/index.html"))))
 
 (def main-window (atom nil))
 
