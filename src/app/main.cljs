@@ -21,16 +21,19 @@
 
 (def main-window (atom nil))
 
-(defn make-window [w h frame? show?]
+(defn make-window
+  [w h frame? show?]
   (BrowserWindow. #js {:width w :height h :frame frame? :show show?}))
 
-(defn init-browser []
+(defn init-browser
+  []
   (reset! main-window (make-window 800 600 true true))
   (load-page @main-window)
   (if dev? (.openDevTools @main-window))
   (.on @main-window "closed" #(reset! main-window nil)))
 
-(defn init []
+(defn init
+  []
   (.on app "window-all-closed" #(when-not (= js/process.platform "darwin") (.quit app)))
   (.on app "ready" init-browser)
   (set! *main-cli-fn* (fn [] nil)))
