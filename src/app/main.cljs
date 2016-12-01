@@ -22,12 +22,12 @@
 (def main-window (atom nil))
 
 (defn make-window
-  [w h frame? show?]
-  (BrowserWindow. #js {:width w :height h :frame frame? :show show?}))
+  [& {:keys [width height frame? show?] :or {width 800 height 600 frame? true show? true}}]
+  (BrowserWindow. #js {:width width :height height :frame frame? :show show?}))
 
 (defn init-browser
   []
-  (reset! main-window (make-window 800 600 true true))
+  (reset! main-window (make-window))
   (load-page @main-window)
   (if dev? (.openDevTools @main-window))
   (.on @main-window "closed" #(reset! main-window nil)))
