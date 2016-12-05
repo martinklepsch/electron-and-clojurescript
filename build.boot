@@ -1,10 +1,13 @@
 (set-env!
  :source-paths    #{"src"}
  :resource-paths  #{"resources"}
- :dependencies '[[adzerk/boot-cljs "1.7.48-3" :scope "test"]
-                 [org.clojure/clojurescript "1.7.107"]
-                 [adzerk/boot-cljs-repl "0.1.10-SNAPSHOT" :scope "test"]
-                 [adzerk/boot-reload    "0.3.2-SNAPSHOT"  :scope "test"]])
+ :dependencies '[[org.clojure/clojurescript "1.9.229"]
+                 [org.clojure/tools.nrepl "0.2.12" :scope "test"]
+                 [com.cemerick/piggieback "0.2.1" :scope "test"]
+                 [weasel "0.7.0" :scope "test"]
+                 [adzerk/boot-cljs "1.7.228-1" :scope "test"]
+                 [adzerk/boot-cljs-repl "0.3.3" :scope "test"]
+                 [adzerk/boot-reload    "0.4.12"  :scope "test"]])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
@@ -23,6 +26,7 @@
         ;; Inject REPL and reloading code into renderer build =======
         (cljs-repl :ids #{"renderer"})
         (reload    :ids #{"renderer"}
+                   :ws-host "localhost"
                    :on-jsload 'app.renderer/init)
         ;; Compile renderer =========================================
         (cljs      :ids #{"renderer"})
@@ -34,4 +38,5 @@
         ;; See http://dev.clojure.org/jira/browse/CLJS-1444 for details.
         (cljs      :ids #{"main"}
                    :compiler-options {:asset-path "target/main.out"
-                                      :closure-defines {'app.main/dev? true}})))
+                                      :closure-defines {'app.main/dev? true}})
+        (target)))
