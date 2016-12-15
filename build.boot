@@ -7,7 +7,7 @@
                  [weasel "0.7.0" :scope "test"]
                  [adzerk/boot-cljs "1.7.228-1" :scope "test"]
                  [adzerk/boot-cljs-repl "0.3.3" :scope "test"]
-                 [adzerk/boot-reload    "0.4.12"  :scope "test"]])
+                 [adzerk/boot-reload    "0.4.13"  :scope "test"]])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
@@ -27,7 +27,8 @@
         (cljs-repl :ids #{"renderer"})
         (reload    :ids #{"renderer"}
                    :ws-host "localhost"
-                   :on-jsload 'app.renderer/init)
+                   :on-jsload 'app.renderer/init
+                   :target-path "target")
         ;; Compile renderer =========================================
         (cljs      :ids #{"renderer"})
         ;; Compile JS for main process ==============================
