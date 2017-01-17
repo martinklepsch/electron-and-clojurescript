@@ -34,3 +34,7 @@ The easiest way to package an electron app is by using
 ```
 electron-packager target/ MyApp --platform=darwin --arch=x64 --version=0.31.2
 ```
+
+# License
+
+This project is licensed under the [MIT license](/LICENSE).
