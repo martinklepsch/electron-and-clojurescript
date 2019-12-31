@@ -18,7 +18,8 @@
   (comp (cljs :ids #{"main"}
               :optimizations :simple)
         (cljs :ids #{"renderer"}
-              :optimizations :advanced)))
+              :optimizations :advanced)
+        (target)))
 
 (deftask dev-build []
   (comp ;; Audio feedback about warnings etc. =======================
